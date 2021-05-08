@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'checkstyle'
+	id 'pmd'
+}
+
+group = 'br.com.axellbrendow'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '15'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+checkstyle {
+	toolVersion = '8.40'
+	showViolations = true
+	configFile = file("config/checkstyle/checkstyle.xml")
+}
+
+pmd {
+	//ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+	ruleSetFiles = files("config/pmd/ruleset.xml")
+	toolVersion = '6.31.0'
+	ignoreFailures = true
+	consoleOutput = true
+}
